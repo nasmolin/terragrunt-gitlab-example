@@ -1,0 +1,24 @@
+output "avatar_url" {
+  value = gitlab_group.this.avatar_url
+}
+
+output "full_name" {
+  value = gitlab_group.this.full_name
+}
+
+output "full_path" {
+  value = gitlab_group.this.full_path
+}
+
+output "id" {
+  value = gitlab_group.this.id
+}
+
+output "runners_token" {
+  value = gitlab_group.this.runners_token
+  sensitive = true
+}
+
+output "web_url" {
+  value = gitlab_group.this.web_url
+}

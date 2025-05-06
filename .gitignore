@@ -1,0 +1,15 @@
+# Игнорировать кэш Terragrunt
+*.terragrunt-cache
+
+# Игнорировать Terraform state и другие временные файлы
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.terraform.lock.hcl
+
+# Игнорировать настройки окружения
+.envrc
+
+# Игнорировать WIP
+/modules/variable/
+/modules/project/
