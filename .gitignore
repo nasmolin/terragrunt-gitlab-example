@@ -12,4 +12,4 @@
 
 # Игнорировать WIP
 /modules/variable/
-/modules/project/
+#/modules/project/
