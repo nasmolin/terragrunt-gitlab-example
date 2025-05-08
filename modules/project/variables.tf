@@ -10,13 +10,13 @@ variable "protected_tags" {
 }
 
 # ====================================
-# resource gitlab_branch_protection variables
+# resource gitlab_branch variables
 # ====================================
 
-variable "protected_branches" {
+variable "extra_branches" {
+  description = "List of additional branches to create in the GitLab project and protect"
   type        = list(string)
-  description = "List of branch names to be protected in the GitLab project."
-  default     = ["dev", "staging", "production"]
+  default     = ["staging", "production"]
 }
 
 # ====================================

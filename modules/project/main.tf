@@ -97,6 +97,32 @@ resource "gitlab_project" "this" {
   issues_template = var.issues_template
 }
 
+resource "gitlab_branch_protection" "default_branch" {
+  project                = gitlab_project.this.id
+  branch                 = var.default_branch
+  push_access_level      = "developer"
+  merge_access_level     = "developer"
+  unprotect_access_level = "admin"
+}
+
+resource "gitlab_branch" "extra_branches" {
+  for_each = toset(var.extra_branches)
+
+  name    = each.value
+  ref     = var.default_branch
+  project = gitlab_project.this.id
+}
+
+resource "gitlab_branch_protection" "extra_branches" {
+  for_each = toset(var.extra_branches)
+
+  project                = gitlab_project.this.id
+  branch                 = each.value
+  push_access_level      = "no one"
+  merge_access_level     = "maintainer"
+  unprotect_access_level = "admin"
+}
+
 resource "gitlab_project_variable" "vars" {
   for_each = var.variables
 
@@ -105,16 +131,6 @@ resource "gitlab_project_variable" "vars" {
   value     = each.value.value
   protected = try(each.value.protected, false)
   masked    = try(each.value.masked, false)
-}
-
-resource "gitlab_branch_protection" "branches" {
-  for_each = toset(var.protected_branches)
-
-  project                = gitlab_project.this.id
-  branch                 = each.value
-  push_access_level      = "maintainer"
-  merge_access_level     = "maintainer"
-  unprotect_access_level = "admin"
 }
 
 resource "gitlab_tag_protection" "tags" {

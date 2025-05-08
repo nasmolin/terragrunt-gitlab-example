@@ -15,6 +15,10 @@ locals {
 
 dependency "parent" {
   config_path = "../../"
+  mock_outputs = {
+    id = "9999"
+  }
+  mock_outputs_allowed_terraform_commands = ["plan"]
 }
 
 inputs = {
