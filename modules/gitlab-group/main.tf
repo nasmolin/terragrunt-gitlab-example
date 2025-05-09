@@ -1,14 +1,3 @@
-terraform {
-  backend "local" {}
-  required_providers {
-    gitlab = {
-      source  = "gitlabhq/gitlab"
-      version = "= 17.11.0"
-    }
-  }
-}
-
-# https://registry.terraform.io/providers/gitlabhq/gitlab/17.11.0/docs/resources/group
 resource "gitlab_group" "this" {
   name                                = var.name
   path                                = var.path

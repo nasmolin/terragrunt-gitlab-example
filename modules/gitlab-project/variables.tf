@@ -20,19 +20,6 @@ variable "extra_branches" {
 }
 
 # ====================================
-# resource gitlab_project_variable variables
-# ====================================
-
-variable "variables" {
-  type = map(object({
-    value     = string
-    protected = optional(bool)
-    masked    = optional(bool)
-  }))
-  default = {}
-}
-
-# ====================================
 # resource gitlab_project variables
 # ====================================
 

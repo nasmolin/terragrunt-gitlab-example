@@ -1,16 +1,3 @@
-
-terraform {
-  backend "local" {}
-  required_providers {
-    gitlab = {
-      source  = "gitlabhq/gitlab"
-      version = "= 17.11.0"
-    }
-  }
-}
-
-
-
 resource "gitlab_project" "this" {
   name                                         = var.name
   path                                         = var.path
@@ -124,16 +111,6 @@ resource "gitlab_branch_protection" "extra_branches" {
   push_access_level      = "no one"
   merge_access_level     = "maintainer"
   unprotect_access_level = "admin"
-}
-
-resource "gitlab_project_variable" "vars" {
-  for_each = var.variables
-
-  project   = gitlab_project.this.id
-  key       = each.key
-  value     = each.value.value
-  protected = try(each.value.protected, false)
-  masked    = try(each.value.masked, false)
 }
 
 resource "gitlab_tag_protection" "tags" {

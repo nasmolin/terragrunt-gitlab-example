@@ -1,3 +1,13 @@
+terraform {
+  backend "local" {}
+  required_providers {
+    gitlab = {
+      source  = "gitlabhq/gitlab"
+      version = "= 17.11.0"
+    }
+  }
+}
+
 provider "gitlab" {
   token = var.gitlab_token
   base_url = var.gitlab_url
