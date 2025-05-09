@@ -1,5 +1,3 @@
-
-
 terraform {
   backend "local" {}
   required_providers {
@@ -29,15 +27,15 @@ resource "gitlab_group" "this" {
   shared_runners_minutes_limit        = var.shared_runners_minutes_limit
   subgroup_creation_level             = var.subgroup_creation_level
   two_factor_grace_period             = var.two_factor_grace_period
-
 }
 
-resource "gitlab_group_variable" "vars" {
-  for_each = var.variables
+resource "gitlab_group_variable" "this" {
+  for_each          = var.group_variables
 
-  group     = gitlab_group.this.id
-  key       = each.key
-  value     = each.value.value
-  protected = try(each.value.protected, false)
-  masked    = try(each.value.masked, false)
+  group             = gitlab_group.this.id
+  key               = each.key
+  value             = each.value.value
+  protected         = try(each.value.protected, false)
+  masked            = try(each.value.masked, false)
+  environment_scope = "*"
 }

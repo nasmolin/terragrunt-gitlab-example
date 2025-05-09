@@ -14,9 +14,10 @@ variable "parent_id" {
   default     = 0
 }
 
-variable "variables" {
+variable "group_variables" {
   description = "Gitlab-ci group variables"
   type = map(object({
+    key       = string
     value     = string
     protected = optional(bool)
     masked    = optional(bool)

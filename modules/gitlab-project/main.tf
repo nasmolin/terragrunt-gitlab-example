@@ -1,3 +1,4 @@
+
 terraform {
   backend "local" {}
   required_providers {
@@ -7,6 +8,8 @@ terraform {
     }
   }
 }
+
+
 
 resource "gitlab_project" "this" {
   name                                         = var.name

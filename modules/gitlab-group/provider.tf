@@ -12,3 +12,4 @@ variable "gitlab_url" {
   description = "GitLab API URL"
   type        = string
 }
+

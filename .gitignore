@@ -10,6 +10,5 @@
 # Игнорировать настройки окружения
 .envrc
 
-# Игнорировать WIP
-/modules/variable/
-#/modules/project/
+# Игнорировать дебаг-файлы 
+terragrunt-debug.tfvars.json
