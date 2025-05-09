@@ -1,7 +1,7 @@
 # Шаблон для групп первого уровня.
 
 terraform {
-  source = "../../modules/group"
+  source = "../../modules/gitlab-group"
 }
 
 include {

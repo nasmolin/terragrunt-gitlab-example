@@ -1,7 +1,7 @@
 # шаблон проекта в группе
 
 terraform {
-  source = "../../../../../modules/project"
+  source = "../../../../../modules/gitlab-project"
 }
 
 include {
