@@ -12,3 +12,6 @@
 
 # Игнорировать дебаг-файлы 
 terragrunt-debug.tfvars.json
+
+# Игнорировать скрипты
+scripts
