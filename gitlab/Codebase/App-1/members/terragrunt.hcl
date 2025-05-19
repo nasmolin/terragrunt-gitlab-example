@@ -1,5 +1,5 @@
 terraform {
-  source = "../../../../modules/membership-generator"
+  source = "../../../../modules/memberships-generator"
 }
 
 include {
