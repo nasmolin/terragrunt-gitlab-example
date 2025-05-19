@@ -6,6 +6,19 @@ include {
   path = find_in_parent_folders("root.hcl")
 }
 
+dependency "members" {
+  config_path = "./members"
+  mock_outputs_allowed_terraform_commands = ["plan"]
+  mock_outputs = {
+    generated_memberships  = {
+      "mock.user@example.com" = {
+        user_id      = 9999
+        access_level = "mock"
+      }
+    }
+  }
+}
+
 dependency "generate-group-variables" {
   config_path = "./secrets"
   mock_outputs_allowed_terraform_commands = ["plan"]
@@ -40,5 +53,7 @@ inputs = {
       masked        = val.masked
     }
   }
+
+  memberships = dependency.members.outputs.generated_memberships
 }
 

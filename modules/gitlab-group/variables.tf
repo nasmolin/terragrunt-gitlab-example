@@ -14,6 +14,13 @@ variable "parent_id" {
   default     = 0
 }
 
+variable "memberships" {
+  type = map(object({
+    user_id      = number
+    access_level = string
+  }))
+}
+
 variable "group_variables" {
   description = "Gitlab-ci group variables"
   type = map(object({

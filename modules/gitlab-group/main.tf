@@ -28,3 +28,11 @@ resource "gitlab_group_variable" "this" {
   masked            = try(each.value.masked, false)
   environment_scope = "*"
 }
+
+resource "gitlab_group_membership" "this" {
+  for_each = var.memberships
+
+  user_id     = each.value.user_id
+  group_id    = gitlab_group.this.id
+  access_level = each.value.access_level
+}
