@@ -1,5 +1,5 @@
 terraform {
-  source = "../../../modules/secrets-generator"
+  source = "../../../../modules/secrets-generator"
 }
 
 include {

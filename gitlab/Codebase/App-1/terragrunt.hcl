@@ -1,5 +1,5 @@
 terraform {
-  source = "../../modules/gitlab-group"
+  source = "../../../modules/gitlab-group"
 }
 
 include {
@@ -13,7 +13,7 @@ dependency "members" {
     generated_memberships  = {
       "mock.user@example.com" = {
         user_id      = 9999
-        access_level = "mock"
+        access_level = "no one"
       }
     }
   }

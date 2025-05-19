@@ -1,5 +1,5 @@
 terraform {
-  source = "../../../modules/membership-generator"
+  source = "../../../../modules/membership-generator"
 }
 
 include {
@@ -7,7 +7,7 @@ include {
 }
 
 dependency "users" {
-  config_path = "../../Users"
+  config_path = "../../../Users"
   mock_outputs_allowed_terraform_commands = ["plan"]
   mock_outputs = {
     user_ids = {

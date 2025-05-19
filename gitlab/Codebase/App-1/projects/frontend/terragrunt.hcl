@@ -1,5 +1,5 @@
 terraform {
-  source = "../../../../modules/gitlab-project"
+  source = "../../../../../modules/gitlab-project"
 }
 
 include {
