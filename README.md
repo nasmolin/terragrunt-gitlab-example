@@ -1,5 +1,3 @@
-> WIP!
-
 # Terragrunt + GitLabhq/gitlab Provider Example
 
 Пример использования Terragrunt для управления ресурсами GitLab (группами, пользователями, правами,проектами и секретами) через Terraform-модули.
