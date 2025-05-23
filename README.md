@@ -1,22 +1,17 @@
 # Terragrunt + GitLabhq/gitlab Provider Example
 
-Пример использования Terragrunt для управления ресурсами GitLab (группами, пользователями, правами,проектами и секретами) через Terraform-модули.
+Пример использования Terragrunt для управления ресурсами GitLab (группами, пользователями, правами, проектами и секретами) через Terraform-модули.
 
 ---
 
-## 🔑 Настройка окружения
+## Локальный запуск
 
-```
-export GITLAB_API_TOKEN="your_personal_access_token"
-export GITLAB_API_URL="https://gitlab.com/api/v4/"
+```bash
+export GITLAB_API_TOKEN="..."
+export GITLAB_API_URL="..."  # example: "https://gitlab.com/api/v4/"
 export AWS_ACCESS_KEY_ID="..."
 export AWS_SECRET_ACCESS_KEY="..."
 ```
----
-
-## 🚀 Локальный запуск
-
-
 ```bash
 git clone https://github.com/nasmolin/terragrunt-gitlab-example.git
 ```
@@ -24,17 +19,17 @@ git clone https://github.com/nasmolin/terragrunt-gitlab-example.git
 cd terragrunt-gitlab-example
 ```
 ```bash
-cat <<EOF >> remote_state.hcl
+cat <<EOF > remote_state.hcl
 remote_state {
   backend = "s3"
   
   config = {
-    endpoint      = "xxx"
-    bucket         = "xxx"
-    key            = "\${path_relative_to_include()}/terraform.tfstate"
-    region         = "xxx"
-    dynamodb_endpoint = "xxx"
-    dynamodb_table    = "xxx"
+    endpoint          = "..."
+    bucket            = "..."
+    key               = "\${path_relative_to_include()}/terraform.tfstate"
+    region            = "..."
+    dynamodb_endpoint = "..."
+    dynamodb_table    = "..."
   }
 }
 EOF
@@ -48,18 +43,43 @@ terragrunt apply -all
 
 ---
 
-## ⚙️ Описание модулей
-`modules/gitlab-group`
-Создаёт ресурс gitlab_group с набором переменных (gitlab_group_variable), членством в группе(gitlab_group_membership).
+## Порядок выполнения модулей
 
-`modules/gitlab-project`
-Создаёт ресурс gitlab_project, ветки (gitlab_branch), protection rules (gitlab_branch_protection, gitlab_tag_protection) и CI/CD-переменные (gitlab_project_variable).
+```bash
+Group 1
+- Module ./gitlab/Codebase/App-1/secrets            # Генерация CI/CD group variables.
+- Module ./gitlab/Users                             # Создание пользователей gitlab.
 
-`modules/gitlab-user`
-Создаёт ресурсы gitlab_user.
+Group 2
+- Module ./gitlab/Codebase/App-1/members            # Генерация мапы email:user_id
 
-`modules/secrets-generator`
-Вспомогательный модуль. Генерирует случайные пароли (random_password) по конфигурации generate_secrets.
+Group 3
+- Module ./gitlab/Codebase/App-1                    # Создание группы, добавление участников и установка групповых переменных.
 
-`modules/memberships-generator`
-Вспомогательный модуль. Генерирует необходимые перменные в outputs для ресурса gitlab_group_membership.
+Group 4                                             # Создание проектов внутри группы App-1.
+- Module ./gitlab/Codebase/App-1/projects/backend   
+- Module ./gitlab/Codebase/App-1/projects/frontend
+```
+
+---
+
+## Описание terraform модулей
+
+`modules/gitlab-group` создает ресурсы:
+GitLab-группу (gitlab_group)
+Групповые переменные (gitlab_group_variable)
+Членство пользователей в группе (gitlab_group_membership)
+
+`modules/gitlab-project` создает ресурсы:
+GitLab-проект (gitlab_project)
+Ветки (gitlab_branch)
+Правила защиты (gitlab_branch_protection, gitlab_tag_protection)
+
+`modules/gitlab-user` создает ресурсы:
+Пользователей GitLab (gitlab_user)
+
+`modules/secrets-generator` Вспомогательный модуль.
+Генерирует случайные секреты с помощью ресурса random_password, согласно конфигурации generate_secrets.
+
+`modules/memberships-generator` Вспомогательный модуль.
+Формирует необходимые переменные в outputs для использования в gitlab_group_membership.
