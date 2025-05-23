@@ -351,42 +351,6 @@ variable "printing_merge_request_link_enabled" {
   default     = true
 }
 
-variable "push_rules" {
-  description = "Push rules to enforce branch protection and commit standards for Terraform repositories"
-  type = list(object({
-    author_email_regex              = optional(string)
-    branch_name_regex              = optional(string)
-    commit_committer_check         = optional(bool)
-    commit_committer_name_check    = optional(bool)
-    commit_message_negative_regex  = optional(string)
-    commit_message_regex           = optional(string)
-    deny_delete_tag                = optional(bool)
-    file_name_regex                = optional(string)
-    max_file_size                  = optional(number)
-    member_check                   = optional(bool)
-    prevent_secrets                = optional(bool)
-    reject_non_dco_commits         = optional(bool)
-    reject_unsigned_commits        = optional(bool)
-  }))
-  default = [
-    {
-      author_email_regex              = ""
-      branch_name_regex              = "^(feature|fix|hotfix|chore|refactor|release|ci|build|research|sync)/.+$"
-      commit_committer_check         = true
-      commit_committer_name_check    = true
-      commit_message_negative_regex  = "(ssh:\\/\\/|http:\\/\\/|https:\\/\\/|password|secret|token)"
-      commit_message_regex           = "^(no issue|[A-Z]{2,10}-\\d+) \\| (chore|fix|hotfix|refactor|perf|ci|build|feature|breaking|research|sync): .+$"
-      deny_delete_tag                = true
-      file_name_regex                = "(\\.jar|\\.exe|\\.env|\\.pem)$"
-      max_file_size                  = 5
-      member_check                   = true
-      prevent_secrets                = true
-      reject_non_dco_commits         = true
-      reject_unsigned_commits        = true
-    }
-  ]
-}
-
 variable "releases_access_level" {
   description = "Set the releases access level."
   type        = string

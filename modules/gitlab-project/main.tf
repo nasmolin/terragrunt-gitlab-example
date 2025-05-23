@@ -51,23 +51,6 @@ resource "gitlab_project" "this" {
   merge_requests_access_level                  = var.merge_requests_access_level
   squash_option                                = var.squash_option
 
-#  отключено до обновления gitlab и проверки.
-#  push_rules {
-#    author_email_regex            = var.push_rules[0].author_email_regex
-#    branch_name_regex             = var.push_rules[0].branch_name_regex
-#    commit_committer_check        = var.push_rules[0].commit_committer_check
-#    commit_committer_name_check   = var.push_rules[0].commit_committer_name_check
-#    commit_message_negative_regex = var.push_rules[0].commit_message_negative_regex
-#    commit_message_regex          = var.push_rules[0].commit_message_regex
-#    deny_delete_tag               = var.push_rules[0].deny_delete_tag
-#    file_name_regex               = var.push_rules[0].file_name_regex
-#    max_file_size                 = var.push_rules[0].max_file_size
-#    member_check                  = var.push_rules[0].member_check
-#    prevent_secrets               = var.push_rules[0].prevent_secrets
-#    reject_non_dco_commits        = var.push_rules[0].reject_non_dco_commits
-#    reject_unsigned_commits       = var.push_rules[0].reject_unsigned_commits
-#  }
-
   container_expiration_policy {
     cadence            = var.container_expiration_policy[0].cadence
     enabled            = var.container_expiration_policy[0].enabled
