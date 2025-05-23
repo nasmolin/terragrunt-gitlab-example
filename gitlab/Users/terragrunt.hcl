@@ -6,6 +6,10 @@ include {
   path = find_in_parent_folders("root.hcl")
 }
 
+include "remote" {
+  path = find_in_parent_folders("remote_state.hcl")
+}
+
 inputs = {
   users = {
     "developer.user@example.com" = {

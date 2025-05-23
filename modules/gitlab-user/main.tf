@@ -1,3 +1,10 @@
+resource "random_password" "user" {
+  for_each = var.users
+
+  length  = 16
+  special = true
+}
+
 resource "gitlab_user" "this" {
   for_each = var.users
 
@@ -11,12 +18,6 @@ resource "gitlab_user" "this" {
   skip_confirmation = true
   is_external       = false
   reset_password    = false
+  password          = random_password.user[each.key].result
   note              = "Created by Terraform"
-}
-
-resource "random_password" "user" {
-  for_each = var.users
-
-  length  = 16
-  special = true
 }

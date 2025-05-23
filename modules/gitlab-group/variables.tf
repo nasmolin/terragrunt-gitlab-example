@@ -65,13 +65,13 @@ variable "prevent_forking_outside_group" {
 variable "project_creation_level" {
   description = "Level of project creation allowed in the group"
   type        = string
-  default     = "developer"
+  default     = "owner"
 }
 
 variable "request_access_enabled" {
   description = "Enable request access for users who are not members of the group"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "shared_runners_minutes_limit" {

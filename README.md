@@ -9,22 +9,40 @@
 ```
 export GITLAB_API_TOKEN="your_personal_access_token"
 export GITLAB_API_URL="https://gitlab.com/api/v4/"
+export AWS_ACCESS_KEY_ID="..."
+export AWS_SECRET_ACCESS_KEY="..."
 ```
-> Важно: токен должен иметь права на создание групп и проектов.
-
 ---
 
 ## 🚀 Локальный запуск
 
-Клонируйте репозиторий и перейдите в него:
 
 ```bash
 git clone https://github.com/nasmolin/terragrunt-gitlab-example.git
+```
+```bash
 cd terragrunt-gitlab-example
 ```
-
+```bash
+cat <<EOF >> remote_state.hcl
+remote_state {
+  backend = "s3"
+  
+  config = {
+    endpoint      = "xxx"
+    bucket         = "xxx"
+    key            = "\${path_relative_to_include()}/terraform.tfstate"
+    region         = "xxx"
+    dynamodb_endpoint = "xxx"
+    dynamodb_table    = "xxx"
+  }
+}
+EOF
+```
 ```bash
 terragrunt plan -all
+```
+```bash
 terragrunt apply -all
 ```
 

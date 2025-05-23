@@ -25,11 +25,8 @@ resource "gitlab_project" "this" {
   build_git_strategy                           = var.build_git_strategy
   ci_forward_deployment_enabled                = var.ci_forward_deployment_enabled
   ci_pipeline_variables_minimum_override_role  = var.ci_pipeline_variables_minimum_override_role
-  ci_restrict_pipeline_cancellation_role       = var.ci_restrict_pipeline_cancellation_role
   ci_separated_caches                          = var.ci_separated_caches
   merge_method                                 = var.merge_method
-  merge_pipelines_enabled                      = var.merge_pipelines_enabled
-  merge_trains_enabled                         = var.merge_trains_enabled
   group_runners_enabled                        = var.group_runners_enabled
   allow_merge_on_skipped_pipeline              = var.allow_merge_on_skipped_pipeline
   allow_pipeline_trigger_approve_deployment    = var.allow_pipeline_trigger_approve_deployment
@@ -37,7 +34,6 @@ resource "gitlab_project" "this" {
   autoclose_referenced_issues                  = var.autoclose_referenced_issues
   avatar_hash                                  = var.avatar_hash
   ci_delete_pipelines_in_seconds               = var.ci_delete_pipelines_in_seconds
-  external_authorization_classification_label  = var.external_authorization_classification_label
   forking_access_level                         = var.forking_access_level
   group_with_project_templates_id              = var.group_with_project_templates_id
   model_experiments_access_level               = var.model_experiments_access_level
@@ -45,8 +41,6 @@ resource "gitlab_project" "this" {
   monitor_access_level                         = var.monitor_access_level
   packages_enabled                             = var.packages_enabled
   pages_access_level                           = var.pages_access_level
-  pre_receive_secret_detection_enabled         = var.pre_receive_secret_detection_enabled
-  prevent_merge_without_jira_issue             = var.prevent_merge_without_jira_issue
   printing_merge_request_link_enabled          = var.printing_merge_request_link_enabled
   analytics_access_level                       = var.analytics_access_level
   builds_access_level                          = var.builds_access_level
@@ -55,6 +49,7 @@ resource "gitlab_project" "this" {
   infrastructure_access_level                  = var.infrastructure_access_level
   issues_access_level                          = var.issues_access_level
   merge_requests_access_level                  = var.merge_requests_access_level
+  squash_option                                = var.squash_option
 
 #  отключено до обновления gitlab и проверки.
 #  push_rules {
@@ -81,10 +76,7 @@ resource "gitlab_project" "this" {
     name_regex_keep    = var.container_expiration_policy[0].name_regex_keep
     older_than         = var.container_expiration_policy[0].older_than
   }
-
   merge_commit_template = var.merge_commit_template
-  merge_requests_template = var.merge_requests_template
-  issues_template = var.issues_template
 }
 
 resource "gitlab_branch_protection" "default_branch" {

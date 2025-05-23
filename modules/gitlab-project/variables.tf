@@ -142,12 +142,6 @@ variable "ci_pipeline_variables_minimum_override_role" {
   default     = "maintainer"
 }
 
-variable "ci_restrict_pipeline_cancellation_role" {
-  description = "Min role to cancel pipelines"
-  type        = string
-  default     = "developer"
-}
-
 variable "ci_separated_caches" {
   description = "Use separate caches for protected branches"
   type        = bool
@@ -206,12 +200,6 @@ variable "environments_access_level" {
   default     = "enabled"
 }
 
-variable "external_authorization_classification_label" {
-  description = "The classification label for the project."
-  type        = string
-  default     = "internal"
-}
-
 variable "feature_flags_access_level" {
   description = "Set the feature flags access level."
   type        = string
@@ -260,12 +248,6 @@ variable "issues_enabled" {
   default     = true
 }
 
-variable "issues_template" {
-  description = "Sets the template for new issues in the project."
-  type        = string
-  default     = "Bug Report"
-}
-
 variable "keep_latest_artifact" {
   description = "Disable or enable the ability to keep the latest artifact for this project."
   type        = bool
@@ -297,12 +279,6 @@ variable "merge_method" {
   default     = "merge"
 }
 
-variable "merge_pipelines_enabled" {
-  description = "Enable or disable merge pipelines."
-  type        = bool
-  default     = true
-}
-
 variable "merge_requests_access_level" {
   description = "Set the merge requests access level."
   type        = string
@@ -311,39 +287,6 @@ variable "merge_requests_access_level" {
 
 variable "merge_requests_enabled" {
   description = "Enable merge requests for the project."
-  type        = bool
-  default     = true
-}
-
-variable "merge_requests_template" {
-  description = "Template for new merge requests in the project."
-  type        = string
-  default     = <<EOF
-### Description:
-- **Merge Request**: {{merge_request_url}}
-- **Author**: {{author_name}} 
-- **Date**: {{current_date}}
-
-## Описание изменений
-- Внесены следующие изменения:
-  - [описание изменений]
-
-## Как протестировать
-- Пожалуйста, выполните следующие шаги, чтобы протестировать:
-  1. [Шаг 1]
-  2. [Шаг 2]
-  3. [Шаг 3]
-
-## Ссылки на задачи
-- example
-
-## Примечания
-- [Дополнительные примечания, если есть]
-EOF
-}
-
-variable "merge_trains_enabled" {
-  description = "Enable or disable merge trains."
   type        = bool
   default     = true
 }
@@ -400,18 +343,6 @@ variable "path" {
   description = "The path of the repository."
   type        = string
   default     = null
-}
-
-variable "pre_receive_secret_detection_enabled" {
-  description = "Whether Secret Push Detection is enabled."
-  type        = bool
-  default     = true
-}
-
-variable "prevent_merge_without_jira_issue" {
-  description = "Set whether merge requests require an associated issue from Jira."
-  type        = bool
-  default     = true
 }
 
 variable "printing_merge_request_link_enabled" {

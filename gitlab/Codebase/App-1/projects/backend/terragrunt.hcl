@@ -1,11 +1,13 @@
-# шаблон проекта в группе
-
 terraform {
   source = "../../../../../modules/gitlab-project"
 }
 
 include {
   path = find_in_parent_folders("root.hcl")
+}
+
+include "remote" {
+  path = find_in_parent_folders("remote_state.hcl")
 }
 
 locals {
