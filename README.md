@@ -65,21 +65,26 @@ Group 4                                             # Создание прое�
 
 ## Описание terraform модулей
 
-`modules/gitlab-group` создает ресурсы:
-GitLab-группу (gitlab_group)
-Групповые переменные (gitlab_group_variable)
-Членство пользователей в группе (gitlab_group_membership)
+**modules/gitlab-group**
+Создает ресурсы:
+- GitLab-группу (`gitlab_group`)
+- Групповые переменные (`gitlab_group_variable`)
+- Членство пользователей в группе (`gitlab_group_membership`)
 
-`modules/gitlab-project` создает ресурсы:
-GitLab-проект (gitlab_project)
-Ветки (gitlab_branch)
-Правила защиты (gitlab_branch_protection, gitlab_tag_protection)
+**modules/gitlab-project**
+Создает ресурсы:
+- GitLab-проект (`gitlab_project`)
+- Ветки (`gitlab_branch`)
+- Правила защиты (`gitlab_branch_protection`, `gitlab_tag_protection`)
 
-`modules/gitlab-user` создает ресурсы:
-Пользователей GitLab (gitlab_user)
+**modules/gitlab-user**
+Создает ресурсы:
+- Пользователей GitLab (`gitlab_user`)
 
-`modules/secrets-generator` Вспомогательный модуль.
-Генерирует случайные секреты с помощью ресурса random_password, согласно конфигурации generate_secrets.
+**modules/secrets-generator**
+Вспомогательный модуль.
+Генерирует случайные секреты с помощью ресурса `random_password`, согласно конфигурации `generate_secrets`.
 
-`modules/memberships-generator` Вспомогательный модуль.
-Формирует необходимые переменные в outputs для использования в gitlab_group_membership.
+**modules/memberships-generator**
+Вспомогательный модуль.
+Формирует необходимые переменные в `outputs` для использования в `gitlab_group_membership`.
