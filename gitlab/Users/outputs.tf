@@ -1,7 +1,12 @@
 output "user_ids" {
-  value = {
-    for email, user in gitlab_user.this : email => user.id
-  }
+  value = merge(
+    {
+      for email, user in gitlab_user.created : email => user.id
+    },
+    {
+      for email, user in gitlab_user.imported : email => user.id
+    }
+  )
 }
 
 output "generated_passwords" {

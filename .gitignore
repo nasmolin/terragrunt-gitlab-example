@@ -14,6 +14,5 @@
 terragrunt-debug.tfvars.json
 
 # Игнорировать рабочие каталоги
-scripts
 docs
 remote_state.hcl

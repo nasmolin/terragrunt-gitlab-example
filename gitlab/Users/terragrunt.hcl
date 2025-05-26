@@ -17,12 +17,24 @@ inputs = {
       name     = "Developer User"
       username = "developer.user"
       state    = "active"
+      create_user = true
+      is_admin    = false
     }
     "maintainer.user@example.com" = {
       email    = "maintainer.user@example.com"
       name     = "Maintainer User"
       username = "maintainer.user"
       state    = "active"
+      create_user = true
+      is_admin    = false 
+    }
+    "owner.user@example.com" = {
+      email    = "owner.user@example.com"
+      name     = "Owner User"
+      username = "owner.user"
+      state    = "active"
+      create_user = true
+      is_admin    = false
     }
   }
 }
